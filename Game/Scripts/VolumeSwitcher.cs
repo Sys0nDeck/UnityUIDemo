@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SoundMuter : MonoBehaviour
+public class VolumeSwitcher : MonoBehaviour
 {
     [SerializeField] private Button _button;
     [SerializeField] private VolumeChanger _volumeChanger;
