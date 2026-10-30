@@ -2935,6 +2935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _button: {fileID: 1562415178}
   _volumeChanger: {fileID: 457960528}
+  _audioListener: {fileID: 186957056}
 --- !u!1 &1587304197
 GameObject:
   m_ObjectHideFlags: 0

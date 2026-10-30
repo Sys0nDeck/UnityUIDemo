@@ -4,19 +4,13 @@ using UnityEngine.UI;
 
 public class VolumeChanger : MonoBehaviour
 {
+    private const string Volume = "Volume";
+
     [SerializeField] private AudioMixerGroup _mixerGroup;
     [SerializeField] private Slider _slider;
 
-    private const string Volume = "Volume";
-
-    private float _minSliderValue = 0.0001f;
-
-    public float MinValue => _minSliderValue;
-
-    private void Awake()
-    {
-        _slider.minValue = _minSliderValue;
-    }
+    private float _volumeCoeff = 20f;
+    private float _minVolume = -80f;
 
     private void OnEnable()
     {
@@ -29,17 +23,17 @@ public class VolumeChanger : MonoBehaviour
         _slider.onValueChanged.RemoveListener(SetSoundVolume);
     }
 
-    private void Start()
-    {
-        SetSoundVolume(_slider.value);
-    }
-
     public void SetSoundVolume(float value)
     {
-        float currentVolume = GetVolume(value);
+        float currentVolume = 0f;
+        if (value == 0)
+            currentVolume = _minVolume;
+        else
+            currentVolume = GetVolume(value);
+
         _mixerGroup.audioMixer.SetFloat(_mixerGroup.name + Volume, currentVolume);
     }
 
     private float GetVolume(float value)
-        => Mathf.Log10(value) * 20;
+        => Mathf.Log10(value) * _volumeCoeff;
 }

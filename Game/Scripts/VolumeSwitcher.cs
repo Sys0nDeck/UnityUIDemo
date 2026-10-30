@@ -5,6 +5,7 @@ public class VolumeSwitcher : MonoBehaviour
 {
     [SerializeField] private Button _button;
     [SerializeField] private VolumeChanger _volumeChanger;
+    [SerializeField] private AudioListener _audioListener;
 
     private bool _isMute = false;
 
@@ -23,13 +24,8 @@ public class VolumeSwitcher : MonoBehaviour
         _isMute = !_isMute;
 
         if (_isMute)
-        {
-            _volumeChanger.SetSoundVolume(_volumeChanger.MinValue);
-            _volumeChanger.enabled = false;
-        }
+            _audioListener.enabled = false;
         else
-        {
-            _volumeChanger.enabled = true;
-        }
+            _audioListener.enabled = true;
     }
 }
